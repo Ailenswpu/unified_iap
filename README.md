@@ -55,7 +55,7 @@ If you apps or games are published to googleplay, see [gp-purchase-status-api](h
 ```
 The example return  of valid iap order
 ```ruby
- #<Google::APIClient::Schema::Androidpublisher::V1_1::InappPurchase:0x3fd7bc6649b8 DATA:{"kind"=>"androidpublisher#inappPurchase", "purchaseTime"=>"1428479533509", "purchaseState"=>1, "consumptionState"=>1, "developerPayload"=>""}>
+ <Google::APIClient::Schema::Androidpublisher::V1_1::InappPurchase:0x3fd7bc6649b8 DATA:{"kind"=>"androidpublisher#inappPurchase", "purchaseTime"=>"1428479533509", "purchaseState"=>1, "consumptionState"=>1, "developerPayload"=>""}>
 ```
 
 The example return  of invalid iap order
