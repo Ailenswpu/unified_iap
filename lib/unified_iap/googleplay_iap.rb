@@ -1,6 +1,11 @@
 module UnifiedIap
-  class GoogleplayIap
 
+  class NoApiVersionException          < Exception;end
+  class NoServiceAccountEmailException < Exception;end
+  class NoKeyFileException             < Exception;end
+  class NoDeveloperEmailException      < Exception;end
+
+  class GoogleplayIap
     def verify(googleplay_iap_params = {})
       publisher = client.discovered_api('androidpublisher', 'v1.1')
       client.execute(
@@ -11,14 +16,14 @@ module UnifiedIap
     end
 
     def initialize(params = {})
-      @api_version = params[:api_version] || (raise "must provide api_version")
-      @service_account_email = params[:service_account_email] || (raise "must provide service_account_email")
-      @key_file = params[:key_file] || (raise "must provide key file path")
+      @api_version = params[:api_version] || (raise NoApiVersionException)
+      @service_account_email = params[:service_account_email] || (raise NoServiceAccountEmailException)
+      @key_file = params[:key_file] || (raise NoKeyFileException)
       @key_secret = params[:key_secret] || 'notasecret'
       @scope_url = params[:scope_url] || 'https://www.googleapis.com/auth/androidpublisher'
       @token_credential_uri = params[:token_credential_uri] || 'https://accounts.google.com/o/oauth2/token'
       @audience = params[:audience] || 'https://accounts.google.com/o/oauth2/token'
-      @person = params[:person] || (raise "must provide person email")
+      @person = params[:person] || (raise NoDeveloperEmailException)
     end
 
     def client

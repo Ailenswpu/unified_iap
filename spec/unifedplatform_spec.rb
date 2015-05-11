@@ -14,13 +14,13 @@ describe 'UnifiedIap' do
     let(:googleplay_account_secret_params) do
       {
         api_version: 'v1.1',
-        service_account_email: 'your service account email',
-        key_file: "p12 file ",
+        service_account_email: 'REPLACE YOUR SERVICE ACCOUNT EMAIL',
+        key_file: "PATH TO YOUR p12 File",
         key_secret: 'notasecret',
         scope_url: 'https://www.googleapis.com/auth/androidpublisher',
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
         audience: 'https://accounts.google.com/o/oauth2/token',
-        person: 'google play account email',
+        person: 'YOUR GOOGLEPLAY ACCOUNT EMAIL',
       }
     end
 
@@ -32,7 +32,7 @@ describe 'UnifiedIap' do
     end
 
     let(:amazon_iap) do
-      "replace you amazon secret"
+      "REPLACE YOUR AMAZON SECRET"
     end
 
     it "verify gp success" do

@@ -9,7 +9,8 @@ require "google/api_client"
 require "venice"
 
 module UnifiedIap
-
+  class UnsupportPlatformException < Exception;end
+  
   def self.verify(platform, platform_account_secret, iap_params)
     raise "must provide platform" unless platform
     if platform == "IOS"
@@ -19,8 +20,7 @@ module UnifiedIap
     elsif platform == "AMAZON"
       AndroidAmazonIap.new(platform_account_secret).verify(iap_params)
     else
-      raise "unsupport platform"
+      raise UnsupportPlatformException
     end
   end
-
 end
