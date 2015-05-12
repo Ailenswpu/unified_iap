@@ -27,13 +27,8 @@ module UnifiedIap
     end
 
     def client
-      @client  ||= init_googleplay_api_client
-    end
-
-    def init_googleplay_api_client
-      client = Google::APIClient.new(application_name: 'Ruby Inapppurchases verify', application_version: @api_version)
-
-      client.authorization = Signet::OAuth2::Client.new(
+      @client  ||=  Google::APIClient.new(application_name: 'Ruby Inapppurchases verify', application_version: @api_version).tap do |client|
+        client.authorization = Signet::OAuth2::Client.new(
         token_credential_uri: @token_credential_uri,
         audience: @audience,
         scope: @scope_url,
@@ -42,8 +37,8 @@ module UnifiedIap
       person: @person)
 
       client.authorization.fetch_access_token!
-      client
+      end
     end
-
+    
   end
 end
