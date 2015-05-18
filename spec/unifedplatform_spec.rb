@@ -31,16 +31,16 @@ describe 'UnifiedIap' do
       }
     end
 
-    let(:amazon_iap) do
+    let(:amazon_secret) do
       "REPLACE YOUR AMAZON SECRET"
     end
 
     it "verify gp success" do
-      expect(UnifiedIap.verify("ANDROID_GP", googleplay_account_secret_params, iap_params)['error']).to be_nil
+      expect(UnifiedIap.verify(iap_params, googleplay_account_secret_params)['error']).to be_nil
     end
 
     it "verify amazon" do
-      expect(UnifiedIap.verify("AMAZON", amazon_iap, amazon_iap_params)).to_not be_nil
+      expect(UnifiedIap.verify(amazon_iap_params, amazon_secret)).to_not be_nil
     end
 
   end

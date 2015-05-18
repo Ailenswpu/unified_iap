@@ -9,18 +9,18 @@ require "google/api_client"
 require "venice"
 
 module UnifiedIap
-  class UnsupportPlatformException < Exception;end
+  class InvalidParamsException < Exception;end
   
-  def self.verify(platform, platform_account_secret, iap_params)
+  def self.verify(iap_params, platform_account_secret)
     raise "must provide platform" unless platform
-    if platform == "IOS"
+    if iap_params.has_key?(:receipt)
       IosIap.new.verify(iap_params)
-    elsif platform == "ANDROID_GP"
+    elsif iap_params.has_key?(:package_name)
       GoogleplayIap.new(platform_account_secret).verify(iap_params)
-    elsif platform == "AMAZON"
+    elsif iap_params.has_key?(:amazon_user_id)
       AndroidAmazonIap.new(platform_account_secret).verify(iap_params)
     else
-      raise UnsupportPlatformException
+      raise InvalidParamsException
     end
   end
 end
